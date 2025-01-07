@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            font-size: 16px;
+            padding: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Sentiment Analysis</h1>
+    <p>Enter a sentence below to check if it is positive or negative:</p>
+    <textarea id="userInput" placeholder="Type your sentence here..."></textarea>
+    <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+    <div id="result"></div>
+
+    <script>
+        // Simple list of positive and negative words
+        const positiveWords = ["love", "amazing", "happy", "great", "fantastic", "good"];
+        const negativeWords = ["hate", "terrible", "sad", "bad", "worst", "angry"];
+
+        // Function to analyze sentiment
+        function analyzeSentiment() {
+            const input = document.getElementById("userInput").value.toLowerCase();
+            let positiveCount = 0;
+            let negativeCount = 0;
+
+            // Split input into words and check for matches
+            const words = input.split(/\s+/);
+            words.forEach(word => {
+                if (positiveWords.includes(word)) {
+                    positiveCount++;
+                }
+                if (negativeWords.includes(word)) {
+                    negativeCount++;
+                }
+            });
+
+            // Display result
+            const resultDiv = document.getElementById("result");
+            if (positiveCount > negativeCount) {
+                resultDiv.textContent = "The sentiment is: Positive 😊";
+                resultDiv.style.color = "green";
+            } else if (negativeCount > positiveCount) {
+                resultDiv.textContent = "The sentiment is: Negative 😞";
+                resultDiv.style.color = "red";
+            } else {
+                resultDiv.textContent = "The sentiment is: Neutral 😐";
+                resultDiv.style.color = "gray";
+            }
+        }
+    </script>
+</body>
+</html>
